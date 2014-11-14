@@ -1,0 +1,25 @@
+{
+  "name": "log-watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Desmonddai583/log-watcher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Desmonddai583/log-watcher/issues"
+  },
+  "homepage": "https://github.com/Desmonddai583/log-watcher",
+  "dependencies": {
+    "jade": "^1.7.0",
+    "mailgun-js": "^0.6.7",
+    "nlogger": "^0.4.0",
+    "tail": "^0.4.0"
+  }
+}

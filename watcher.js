@@ -6,34 +6,15 @@ Tail = require('tail').Tail;
 tail = new Tail(config.path);
 
 tail.on("line", function(data) {
-  var check_blacklist = true;
+  var white_regex = new RegExp(config.whitelist.join("|"));
+  var black_regex = new RegExp(config.blacklist.join("|"));
 
-  config.whitelist.every(function(keyword) {
-    var is_find = false;
-    if(data.indexOf(keyword) >= 0) {
-      check_blacklist = false;
-      is_find = true;
+  if(!white_regex.test(data)) {
+    if(black_regex.test(data)) {
+      mailer.sendErrorAlert(data, function() {
+        logger.info("Send an error alert email to the admin");
+      });
     }
-    if (is_find) 
-      return false;
-    else 
-      return true;
-  });
-
-  if(check_blacklist) {
-    config.blacklist.every(function(keyword) {
-      if(data.indexOf(keyword) >= 0) {
-        var is_find = false;
-        mailer.sendErrorAlert(data, function() {
-          logger.info("Send an error alert email to the admin");
-          is_find = true;
-        });
-        if(is_find) 
-          return false;
-        else 
-          return true;
-      }
-    });
   }
 });
 
